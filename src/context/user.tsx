@@ -26,8 +26,6 @@ const UserProvider = ({ children }) => {
     const [id,setId] = useState("")
     
     
-
-
     useEffect(() => {
         return onAuthStateChanged(auth, listenAuth)
     }, [])
@@ -52,6 +50,7 @@ const UserProvider = ({ children }) => {
                  if (doc.data().email == email){
                     setPonto(doc.data().pontos)
                     setId(doc.id)
+                    console.log(id)
                     }
                     
               });
@@ -64,8 +63,6 @@ const UserProvider = ({ children }) => {
         })
 
     }
-
-    
 
     const signUp = (email:string, password:string) => {
         setLoading(true);
@@ -82,6 +79,19 @@ const UserProvider = ({ children }) => {
                 const docref = addDoc(collection(db, "dados"), dado)
                 console.log('Usuario cadastrado', userCredential.user);
                 setLoading(false);
+
+                getDocs(collection(db, 'dados'))
+                .then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    console.log(doc.id, ' => ', doc.data());
+                     if (doc.data().email == email){
+                        setPonto(doc.data().pontos)
+                        setId(doc.id)
+                        console.log(id)
+                        }
+                        
+                  });
+                })
             })
             .catch((error) => {
                 console.log('error:', error);
