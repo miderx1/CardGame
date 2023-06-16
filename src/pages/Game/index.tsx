@@ -18,7 +18,7 @@ const Game = () => {
             const db = getFirestore();
             const cardsCollection = collection(db, 'cards')
             const querySnapshot = await getDocs(cardsCollection)
-            const dbCards = querySnapshot.docs.map((doc) => doc.data());
+            const dbCards:any = querySnapshot.docs.map((doc) => doc.data());
             setCards(dbCards);
           } catch (error) {
             console.error('Erro ao obter os cards:', error)

@@ -1,28 +1,29 @@
 import { Link } from 'react-router-dom'
 import './style.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { UserContext } from '../../context/user'
 
-import firebaseApp from '../../services/firebase'
-
-import { getFirestore, addDoc, collection, getDocs, onSnapshot, query } from 'firebase/firestore'
 
 const Dashboard = () => {
 
-    const { signOut, user,ponto } = useContext<any>(UserContext)
+    const { signOut, user,ponto, win, loss } = useContext<any>(UserContext)
+    const nick = user.email.split('@')[0];
 
     return (
         <>
-        <div id="container">
-            <div id="box">
+        <div className="container">
+            <div className="box">
 
-                <h1>Dashboard</h1>
+                <h1 id="title">Dashboard</h1>
                     <>
-                        <div>{user.email}</div>
-                        <div>Pontuação:{ponto}</div>
+                        <div id="email">Olá, {nick} !</div>
+                        <div id="pontos">Pontuação:{ponto}</div>
+                        <div id="wins">Acertos:{win}</div>
+                        <div id="loses">Erros:{loss}</div>
+
                     </>
-                <Link to="/game">JOGAR!</Link>
-                <div onClick={() => signOut()}>Deslogar</div>  
+                    <Link to="/game"><button className='play'>JOGAR</button></Link>
+                <button className="sair" onClick={() => signOut(user)}>Sair</button>  
 
             </div>
         </div>
@@ -30,5 +31,4 @@ const Dashboard = () => {
         </>
     )
 }
-
 export default Dashboard

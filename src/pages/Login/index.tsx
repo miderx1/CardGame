@@ -8,7 +8,7 @@ const Login = () => {
     const [em,setEm] = useState("")
     const [pass,setPass] = useState("")
 
-    const { user, signIn, loading,signUp } = useContext(UserContext)
+    const { user, signIn, loading, signUp } = useContext<any>(UserContext)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,18 +21,17 @@ const Login = () => {
 
     return (
         <>  
-            <div id='container'>
-            
-                <div id='box'>
-                    
-                    <div id="titulo">Usuário</div>
+            <div className='container'>
+                <div className='box'>
+
+                    <div id="titulo">Login</div>
                     <div id='login'>
-                        <div>E-Mail</div>
-                        <input type="text" value={em} onChange={(e) => { setEm(e.target.value) }} />
+                        <div className='Log'>E-Mail</div>
+                        <input id='input' type="text" value={em} onChange={(e) => { setEm(e.target.value) }} />
                     </div>
                     <div id='password'>
-                        <div>Senha</div>
-                        <input type="password" value={pass} onChange={(e) => { setPass(e.target.value) }} />
+                        <div className='Log'>Senha</div>
+                        <input id= 'input' type="password" value={pass} onChange={(e) => { setPass(e.target.value) }} />
                     </div>
                     <button id='logar' onClick={() => signIn(em, pass)}>Login</button>
                     <button id='registrar' onClick={() => signUp(em, pass)}>Registrar</button>

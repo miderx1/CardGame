@@ -12,18 +12,20 @@ import firebaseApp from "../services/firebase";
 
 const UserContext = createContext({})
 
-const UserProvider = ({ children }) => {
+const UserProvider = ({ children }:any) => {
 
 
-    const db = getFirestore(firebaseApp)
+    const db = getFirestore()
 
 
-    const auth = getAuth();
+    const auth:any = getAuth();
     const [couldLogin, setCouldLogin] = useState(false)
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const [ponto, setPonto] = useState(0)
     const [id,setId] = useState("")
+    const [win,setWin] = useState(0)
+    const [loss,setLoss] = useState(0)
     
     
     useEffect(() => {
@@ -50,6 +52,8 @@ const UserProvider = ({ children }) => {
                  if (doc.data().email == email){
                     setPonto(doc.data().pontos)
                     setId(doc.id)
+                    setWin(doc.data().win)
+                    setLoss(doc.data().loss)
                     console.log(id)
                     }
                     
@@ -71,7 +75,9 @@ const UserProvider = ({ children }) => {
 
                 const dado = {
                     email: email,
-                    pontos: 0
+                    pontos: 0,
+                    win: 0,
+                    loss: 0
                 }
 
                 setPonto(dado.pontos)
@@ -87,7 +93,10 @@ const UserProvider = ({ children }) => {
                      if (doc.data().email == email){
                         setPonto(doc.data().pontos)
                         setId(doc.id)
+                        setWin(doc.data().win)
+                        setLoss(doc.data().loss)
                         console.log(id)
+                        console.log("win:", doc.data().win, win)
                         }
                         
                   });
@@ -99,19 +108,43 @@ const UserProvider = ({ children }) => {
             });
     }
 
-    const signOut = () => {
-        console.log('sai!!!')
+    const signOut = (user:any) => {
         setLoading(true)
+        console.log('sai!!!')
+        
+        
+
+        if (id.length < 2){
+
+            console.log("Sem id")
+            getDocs(collection(db, 'dados'))
+                .then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    console.log(doc.id, ' => ', doc.data());
+                     if (doc.data().email == user.email){
+                        console.log("id: ", id)
+                        setPonto(doc.data().pontos)
+                        setId(doc.id)
+                        setWin(doc.data().win)
+                        setLoss(doc.data().loss)
+                        console.log("id: ", id)
+                        }
+                        
+                  });
+                })
+        }
 
         const att = {
-            pontos: ponto
+            pontos: ponto,
+            win: win,
+            loss: loss
           }
         const documentRef = doc(db, "dados", id);
         
         updateDoc(documentRef, att)
         .then(() => {
             console.log("Documento atualizado com sucesso!")
-            console.log(ponto)
+            console.log(ponto, win, loss)
         })
         .catch((error) => {
             console.error("Erro ao atualizar o documento:", error)
@@ -129,21 +162,38 @@ const UserProvider = ({ children }) => {
     }
       
 
-    const incremento = (ponto1: number) =>{
-        setPonto(ponto + ponto1)
+    const incremento = (type: number, ob:any , numero: number) =>{
+
+        //type 0: Ponto
+        //type 1: Erros
+        //type 2: Acertos
+
+        if(type == 0){
+            setPonto(ponto + numero)
+        }
+
+        else if(type == 1){
+            setLoss(loss + numero) 
+            
+        }
+        else{
+            setWin(win + numero)
+            console.log("wins: ", win, type, ob, numero)
+        }
+        
         
     }
 
-    const decremento = (ponto1: number) =>{
-        if (ponto >= ponto1){
-            setPonto(ponto - ponto1)}
+    const decremento = (numero: number) =>{
+        if (ponto >= numero){
+            setPonto(ponto - numero)}
         else{
             setPonto(0)
         }
 
     }
     return (
-        <UserContext.Provider value={{ couldLogin, signIn, signOut,signUp, user,ponto, loading,id,incremento,decremento }}>
+        <UserContext.Provider value={{ couldLogin, signIn, signOut,signUp, user,ponto, loading,id,incremento,decremento,win,loss }}>
             {children}
         </UserContext.Provider>
     )

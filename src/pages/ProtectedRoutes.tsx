@@ -4,7 +4,7 @@ import { UserContext } from "../context/user"
 
 const ProtectedRoutes = () => {
 
-    const { couldLogin, user } = useContext(UserContext)
+    const { couldLogin, user } = useContext<any>(UserContext)
 
     const allowAccess = couldLogin
     return user ? <Outlet /> : <Navigate to="/login" />
