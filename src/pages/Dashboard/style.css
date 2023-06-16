@@ -17,7 +17,7 @@
     font-family: 'Lilita One';
     font-size: 30px;
     position: relative;
-    left: 120px;
+    left: 140px;
 }
 
 .sair{
@@ -44,9 +44,40 @@
     font-family: 'Public Sans';
     font-weight: bold;
     position: absolute;
-    top: 40%;
+    top: 20%;
     left: 25%;
     font-size: 30px;
+}
+#win_loss{
+    font-family: 'Public Sans';
+    font-weight: bold;
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    font-size: 23px;
+    word-spacing: 50px;
+
+
+}
+
+#wins{
+    font-family: 'Public Sans';
+    position: absolute;
+    top: 35%;
+    left: 34%;
+    font-size: 30px;
+    color: green;
+
+
+}
+
+#loses{
+    font-family: 'Public Sans';
+    position: absolute;
+    top: 35%;
+    left: 65%;
+    font-size: 30px;
+    color: red;
 
 
 }

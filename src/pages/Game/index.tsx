@@ -24,7 +24,6 @@ const Game = () => {
             console.error('Erro ao obter os cards:', error)
           }
         };
-    
         buscaCards();
       }, []);
 
@@ -32,7 +31,7 @@ const Game = () => {
         <>
             <div id="container-topo">
                 <div className='titulo'>FlashCard Challenge</div>
-                <Link id="voltar" to="/dashboard">VOLTAR</Link>
+                <Link id="voltar" to="/dashboard"><button className='play'>VOLTAR</button></Link>
                 <Xp total={ponto} />
             </div>
             <div id="container-cards">

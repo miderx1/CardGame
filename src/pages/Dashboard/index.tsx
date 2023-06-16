@@ -14,12 +14,12 @@ const Dashboard = () => {
         <div className="container">
             <div className="box">
 
-                <h1 id="title">Dashboard</h1>
+                <h1 id="title">{nick}</h1>
                     <>
-                        <div id="email">Olá, {nick} !</div>
                         <div id="pontos">Pontuação:{ponto}</div>
-                        <div id="wins">Acertos:{win}</div>
-                        <div id="loses">Erros:{loss}</div>
+                        <div id="wins">{win}</div>
+                        <div id="loses">{loss}</div>
+                        <div id="win_loss">Acertos Erros</div>
 
                     </>
                     <Link to="/game"><button className='play'>JOGAR</button></Link>
