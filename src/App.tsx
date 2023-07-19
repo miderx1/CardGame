@@ -3,6 +3,7 @@ import './App.css'
 import Login from './pages/Login'
 import Game from './pages/Game'
 import Dashboard from './pages/Dashboard'
+import SignUp from './pages/SignUp'
 
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoutes from './pages/ProtectedRoutes'
@@ -16,6 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='login' element={<Login />} />
+            <Route path='SignUp' element={<SignUp />} />
             <Route element={<ProtectedRoutes />}>
               <Route path='dashboard' element={<Dashboard />} />
               <Route path='game' element={<Game />} />

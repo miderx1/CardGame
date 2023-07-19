@@ -68,12 +68,29 @@ const UserProvider = ({ children }:any) => {
 
     }
 
-    const signUp = (email:string, password:string) => {
-        setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password)
+    const signUp = (nick: string, email:string, password:string) => {
+        let validador = 0
+        setLoading(true) 
+
+        getDocs(collection(db, 'dados'))
+                .then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    console.log(doc.id, ' => ', doc.data());
+                     if (doc.data().user == nick){
+                        console.log("Nome de usuário já existente")
+                        validador = 1
+                        console.log("validador: ",validador)
+                        }
+                        
+                  });
+                })
+
+        if (validador < 1){
+            createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
 
                 const dado = {
+                    user: nick,
                     email: email,
                     pontos: 0,
                     win: 0,
@@ -106,6 +123,8 @@ const UserProvider = ({ children }:any) => {
                 console.log('error:', error);
                 setLoading(false);
             });
+        } 
+        
     }
 
     const signOut = (user:any) => {

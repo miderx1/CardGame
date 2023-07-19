@@ -1,0 +1,92 @@
+@import "https://fonts.googleapis.com/css2?family=Public+Sans:wght@300&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;700&display=swap";
+
+
+body{
+    background: #2b2037;
+
+}
+.container{
+    background-color: transparent;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.cad_box {
+    text-align: left;
+    width: 400px;
+    height: 450px;
+    background: #ffffff;
+    border-radius: 20px;
+    position: relative;
+   
+    
+}
+
+#cad_email{
+    font-family: 'Public Sans';
+    position: absolute;
+    top: 35%;
+    left: 25%;
+
+}
+
+#cad_pass{
+    font-family: 'Public Sans';
+    position: absolute;
+    top: 55%;
+    left: 25%
+}
+
+#cad_user{
+    font-family: 'Public Sans';
+    position: absolute;
+    top: 15%;
+    left: 25%
+}
+
+
+
+#cad_logar{
+    height: 60px;
+    width: 200px;
+    position: absolute;
+    top: 90%;
+    left: 32%
+}
+
+#registrar{
+    color: white;
+    height: 30px;
+    width: 100px;
+    border-radius: 3px;
+    background:#2b2c58;
+    position: absolute;
+    top: 80%;
+    left: 35%
+}
+
+#cad_title{
+    font-family: 'Public Sans';
+    font-size: 30px;
+    position: absolute;
+    left: 32%;
+    font-weight: bold;
+}
+
+#input{
+    width: 300px;
+    height: 40px;
+    font-size: medium;
+    position: relative;
+    right: 20%;
+    
+}
+
+.Log{
+    position: relative;
+    right: 20%;
+}
